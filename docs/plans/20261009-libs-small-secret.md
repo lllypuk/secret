@@ -69,6 +69,6 @@
 
 **Files:** `README.md`, `CHANGELOG.md`
 
-- [ ] README: пример кода входа (`NewCode(8)`, `HashWith(requestID[:], code)`) и строка Решения 3
-- [ ] `CHANGELOG.md` по Решению 4
-- [ ] коммит `docs: v0.2.0 — код входа в README и CHANGELOG`
+- [x] README: пример кода входа (`NewCode(8)`, `HashWith(requestID[:], code)`) и строка Решения 3
+- [x] `CHANGELOG.md` по Решению 4
+- [x] коммит `docs: v0.2.0 — код входа в README и CHANGELOG`
