@@ -1,6 +1,6 @@
-// Package secret — случайный секрет для ссылки, cookie или токена и его хеш для базы.
+// Package secret — случайный секрет для ссылки, cookie или токена, код входа и их хеши для базы.
 //
-// Соли нет намеренно: секрет случайный и длинный, словарь по нему не строится.
+// У [Hash] соли нет намеренно: секрет случайный и длинный, словарь по нему не строится.
 package secret
 
 import (
@@ -9,6 +9,8 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
+	"math/big"
 )
 
 // Bytes — длина секрета: 32 байта перебору не поддаются, в base64url это 43 символа.
@@ -57,4 +59,31 @@ func MatchHex(value, hash string) bool {
 	}
 
 	return Match(value, raw)
+}
+
+// maxCodeDigits — 10^18 ещё помещается в int64.
+const maxCodeDigits = 18
+
+// NewCode даёт код входа из digits цифр с ведущими нулями; digits вне 1..18 — паника.
+func NewCode(digits int) string {
+	if digits < 1 || digits > maxCodeDigits {
+		panic(fmt.Sprintf("secret: NewCode(%d): длина кода вне 1..18", digits))
+	}
+
+	const base = 10
+
+	limit := new(big.Int).Exp(big.NewInt(base), big.NewInt(int64(digits)), nil)
+	n, _ := rand.Int(rand.Reader, limit)
+
+	return fmt.Sprintf("%0*d", digits, n.Int64())
+}
+
+// HashWith — sha256(salt ‖ value): хеш короткого кода, привязанный к запросу.
+func HashWith(salt []byte, value string) []byte {
+	// Не append(salt, value...): при свободной ёмкости он пишет в массив вызывающего.
+	h := sha256.New()
+	h.Write(salt)
+	h.Write([]byte(value))
+
+	return h.Sum(nil)
 }
