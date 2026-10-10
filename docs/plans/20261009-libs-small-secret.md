@@ -63,7 +63,7 @@
 
 ### Task 2: Verify acceptance criteria
 
-- [ ] импорты — только stdlib; `go vet`, тесты, линтер — зелёные
+- [x] импорты — только stdlib; `go vet`, тесты, линтер — зелёные
 
 ### Task 3: [Final] Документы
 
