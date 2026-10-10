@@ -53,22 +53,22 @@
 
 **Files:** `secret.go`, `secret_test.go`
 
-- [ ] `NewCode`, `HashWith` по Решениям 1–2
-- [ ] тесты: длина и только цифры для 1, 8, 18; ведущие нули встречаются (1000 кодов из 2 цифр
+- [x] `NewCode`, `HashWith` по Решениям 1–2
+- [x] тесты: длина и только цифры для 1, 8, 18; ведущие нули встречаются (1000 кодов из 2 цифр
   дают значение `< 10`); паника на 0 и 19; `HashWith(id, code)` совпадает с
   `sha256.Sum256(append(id, code...))`; разная соль — разные хеши; `salt` после вызова не меняется
   (срез со свободной ёмкостью)
-- [ ] `go test -race ./...` — зелёный
-- [ ] коммит `feat: NewCode и HashWith — код входа и его хеш с солью`
+- [x] `go test -race ./...` — зелёный
+- [x] коммит `feat: NewCode и HashWith — код входа и его хеш с солью`
 
 ### Task 2: Verify acceptance criteria
 
-- [ ] импорты — только stdlib; `go vet`, тесты, линтер — зелёные
+- [x] импорты — только stdlib; `go vet`, тесты, линтер — зелёные
 
 ### Task 3: [Final] Документы
 
 **Files:** `README.md`, `CHANGELOG.md`
 
-- [ ] README: пример кода входа (`NewCode(8)`, `HashWith(requestID[:], code)`) и строка Решения 3
-- [ ] `CHANGELOG.md` по Решению 4
-- [ ] коммит `docs: v0.2.0 — код входа в README и CHANGELOG`
+- [x] README: пример кода входа (`NewCode(8)`, `HashWith(requestID[:], code)`) и строка Решения 3
+- [x] `CHANGELOG.md` по Решению 4
+- [x] коммит `docs: v0.2.0 — код входа в README и CHANGELOG`
